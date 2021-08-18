@@ -13,5 +13,10 @@ namespace Kos
         /// Url of the API
         /// </summary>
         public string? BaseUrl { get; set; }
+
+        /// <summary>
+        /// Throw on 5xx http errors
+        /// </summary>
+        public bool ThrowOnServerException { get; set; } = true;
     }
 }

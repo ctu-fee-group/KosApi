@@ -20,6 +20,7 @@ namespace Kos
         private readonly ILogger _logger;
         private readonly RestClient _client;
         private readonly MemoryCache _cache;
+        private readonly KosApiOptions _options;
         private KosApiPeople? _people;
         private KosApiTeachers? _teachers;
         private KosApiStudents? _students;
@@ -33,6 +34,7 @@ namespace Kos
                 CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache)
             };
 
+            _options = options;
             _cache = new MemoryCache(options.CacheOptions ?? new MemoryCacheOptions());
 
             _client.UseDotNetXmlSerializer();
@@ -71,7 +73,7 @@ namespace Kos
                 _logger.LogWarning($"Cannot obtain href from {typeof(T).FullName} loadable");
                 return default;
             }
-            
+
             if (cachePolicy != CachePolicy.DownloadOnly &&
                 _cache.TryGetValue(kosLoadable.Href, out T? cachedValue))
             {
@@ -94,10 +96,21 @@ namespace Kos
             where T : class, new()
         {
             IRestResponse<AtomEntry<T?>>? response = await _client.ExecuteAsync<AtomEntry<T?>>(request, token);
-            if (!response.IsSuccessful || response?.Data == null || response.Data.Content == null)
+            if (!response.IsSuccessful || response?.Data is null || response.Data.Content is null)
             {
                 _logger.LogWarning(response?.ErrorException,
                     $"Could not obtain kos api information({identifier}): {response?.StatusCode} {response?.ErrorMessage} {response?.Content}");
+            }
+
+            if (_options.ThrowOnServerException && (response is null || (int)response.StatusCode >= 500))
+            {
+                if (response?.ErrorException is not null)
+                {
+                    throw response.ErrorException;
+                }
+                
+                throw new InvalidOperationException(
+                    $"Could not obtain response from the server {response?.StatusCode} {response?.ErrorMessage} {response?.Content}");
             }
 
             return _cache.Set(identifier, response?.Data?.Content);
