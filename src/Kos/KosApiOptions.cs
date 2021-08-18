@@ -17,6 +17,6 @@ namespace Kos
         /// <summary>
         /// Throw on 5xx http errors
         /// </summary>
-        public bool ThrowOnServerException { get; set; } = true;
+        public bool ThrowOnError { get; set; } = true;
     }
 }
