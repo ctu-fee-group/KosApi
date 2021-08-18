@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Caching.Memory;
+
 namespace Kos
 {
     /// <summary>
@@ -5,6 +7,8 @@ namespace Kos
     /// </summary>
     public class KosApiOptions
     {
+        public MemoryCacheOptions? CacheOptions { get; set; }
+        
         /// <summary>
         /// Url of the API
         /// </summary>
