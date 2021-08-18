@@ -1,0 +1,8 @@
+{
+  "Kos": {
+    "BaseUrl": "https://kosapi.feld.cvut.cz/api/3/"
+  },
+  "Auth": {
+    "AccessToken": "<fill access token>"
+  }
+}
