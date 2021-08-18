@@ -43,17 +43,17 @@ namespace Kos
         /// <summary>
         /// Endpoint /people
         /// </summary>
-        public KosApiPeople People => _people ??= new KosApiPeople(_client, _logger);
+        public KosApiPeople People => _people ??= new KosApiPeople(this, _logger);
 
         /// <summary>
         /// Endpoint /teachers
         /// </summary>
-        public KosApiTeachers Teachers => _teachers ??= new KosApiTeachers(_client, _logger);
+        public KosApiTeachers Teachers => _teachers ??= new KosApiTeachers(this, _logger);
 
         /// <summary>
         /// Endpoint /students
         /// </summary>
-        public KosApiStudents Students => _students ??= new KosApiStudents(_client, _logger);
+        public KosApiStudents Students => _students ??= new KosApiStudents(this, _logger);
 
         /// <summary>
         /// Load loadable entity that is obtained using another entity

@@ -10,35 +10,26 @@ namespace Kos
 {
     public class KosApiStudents : KosApiController
     {
-        internal KosApiStudents(RestClient client, ILogger logger)
-            : base(client, logger)
+        internal KosApiStudents(IXmlAtomApi atomApi, ILogger logger)
+            : base(atomApi, logger)
         {
         }
 
         /// <summary>
         /// Call /students/{studyCodeOrId} and return its response
         /// </summary>
-        /// <param name="studyCodeOrId"></param>
         /// <param name="token"></param>
+        /// <param name="cachePolicy"></param>
+        /// <param name="studyCodeOrId"></param>
         /// <returns>Null in case of an error</returns>
-        public Task<KosStudent?> GetStudentAsync(string studyCodeOrId, CancellationToken token = default)
+        public Task<KosStudent?> GetStudentAsync(string studyCodeOrId, CachePolicy cachePolicy = CachePolicy.DownloadIfNotAvailable,
+            CancellationToken token = default)
         {
-            IRestRequest request =
-                new RestRequest("students/{studyCodeOrId}", Method.GET)
-                    .AddUrlSegment("studyCodeOrId", studyCodeOrId);
-            
-            return GetResponse(studyCodeOrId, request, token);
-        }
-
-        private async Task<KosStudent?> GetResponse(string identifier, IRestRequest request, CancellationToken token)
-        {
-            IRestResponse<KosStudent?> response = await _client.ExecuteAsync<KosStudent?>(request, token);
-            if (!response.IsSuccessful)
+            return _atomApi.LoadEntityAsync<KosStudent>(new AtomLoadableEntity<KosStudent>()
             {
-                _logger.LogWarning(response.ErrorException, $"Could not obtain kos student information({identifier}): {response.StatusCode} {response.ErrorMessage} {response.Content}");
-            }
-            
-            return response.Data;
+                Href = $"students/{studyCodeOrId}",
+                Title = null
+            }, cachePolicy, token);
         }
     }
 }

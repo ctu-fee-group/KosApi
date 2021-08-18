@@ -9,35 +9,26 @@ namespace Kos
 {
     public class KosApiTeachers : KosApiController
     {
-        public KosApiTeachers(RestClient client, ILogger logger) : base(client, logger)
+        public KosApiTeachers(IXmlAtomApi atomApi, ILogger logger)
+            : base(atomApi, logger)
         {
         }
-        
+
         /// <summary>
-        /// Call /teachers/{usernameOrId} and return its resopnse
+        /// Call /students/{usernameOrId} and return its response
         /// </summary>
-        /// <param name="usernameOrId"></param>
         /// <param name="token"></param>
+        /// <param name="usernameOrId"></param>
+        /// <param name="cachePolicy"></param>
         /// <returns>Null in case of an error</returns>
-        public Task<KosTeacher?> GetTeacherAsync(string usernameOrId, CancellationToken token = default)
+        public Task<KosTeacher?> GetTeacherAsync(string usernameOrId, CachePolicy cachePolicy = CachePolicy.DownloadIfNotAvailable,
+            CancellationToken token = default)
         {
-            IRestRequest request =
-                new RestRequest("students/{usernameOrId}", Method.GET)
-                    .AddUrlSegment("usernameOrId", usernameOrId);
-            
-            return GetResponse(usernameOrId, request, token);
-        }
-
-        private async Task<KosTeacher?> GetResponse(string identifier, IRestRequest request, CancellationToken token)
-        {
-            IRestResponse<KosTeacher?> response = await _client.ExecuteAsync<KosTeacher?>(request, token);
-            if (!response.IsSuccessful)
+            return _atomApi.LoadEntityAsync<KosTeacher>(new AtomLoadableEntity<KosTeacher>()
             {
-                _logger.LogWarning(response.ErrorException,
-                    $"Could not obtain kos teacher information({identifier}): {response.StatusCode} {response.ErrorMessage} {response.Content}");
-            }
-
-            return response.Data;
+                Href = $"teachers/{usernameOrId}",
+                Title = null
+            }, cachePolicy, token);
         }
     }
 }

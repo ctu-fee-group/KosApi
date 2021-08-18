@@ -10,44 +10,26 @@ namespace Kos
 {
     public class KosApiPeople : KosApiController
     {
-        private readonly Dictionary<string, KosPerson?> _cachedPeople;
-
-        internal KosApiPeople(RestClient client, ILogger logger)
-            : base(client, logger)
+        internal KosApiPeople(IXmlAtomApi atomApi, ILogger logger)
+            : base(atomApi, logger)
         {
-            _cachedPeople = new Dictionary<string, KosPerson?>();
         }
 
         /// <summary>
         /// Call /people/{username} and return its response
         /// </summary>
         /// <param name="username"></param>
+        /// <param name="cachePolicy"></param>
         /// <param name="token"></param>
         /// <returns>Null in case of an error</returns>
-        public async Task<KosPerson?> GetPerson(string username, CancellationToken token = default)
+        public Task<KosPerson?> GetPersonAsync(string username, CachePolicy cachePolicy = CachePolicy.DownloadIfNotAvailable,
+            CancellationToken token = default)
         {
-            if (_cachedPeople.ContainsKey(username))
+            return _atomApi.LoadEntityAsync<KosPerson>(new AtomLoadableEntity<KosPerson>()
             {
-                return _cachedPeople[username];
-            }
-
-            IRestRequest request = new RestRequest("/people/{username}", Method.GET)
-                .AddUrlSegment("username", username);
-
-            IRestResponse<AtomEntry<KosPerson>?> response =
-                await _client.ExecuteAsync<AtomEntry<KosPerson>?>(request, token);
-            _logger.LogInformation("Kosapi response: " + response.Content);
-            _cachedPeople[username] = response.Data?.Content;
-
-            if (!response.IsSuccessful || response.Data == null || response.Data.Content == null)
-            {
-                _logger.LogWarning(
-                    response.ErrorException,
-                    $"Could not obtain kos user information({username}): {response.StatusCode} {response.ErrorMessage} {response.Content}");
-                return null;
-            }
-
-            return response.Data.Content;
+                Href = $"people/{username}",
+                Title = null
+            }, cachePolicy, token);
         }
     }
 }
