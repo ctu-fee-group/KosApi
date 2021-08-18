@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Net.Cache;
 using System.Threading;
 using System.Threading.Tasks;
@@ -100,17 +101,17 @@ namespace Kos
             {
                 _logger.LogWarning(response?.ErrorException,
                     $"Could not obtain kos api information({identifier}): {response?.StatusCode} {response?.ErrorMessage} {response?.Content}");
-            }
 
-            if (_options.ThrowOnServerException && (response is null || (int)response.StatusCode >= 500))
-            {
-                if (response?.ErrorException is not null)
+                if (_options.ThrowOnError && response?.StatusCode != HttpStatusCode.NotFound)
                 {
-                    throw response.ErrorException;
-                }
+                    if (response?.ErrorException is not null)
+                    {
+                        throw response.ErrorException;
+                    }
                 
-                throw new InvalidOperationException(
-                    $"Could not obtain response from the server {response?.StatusCode} {response?.ErrorMessage} {response?.Content}");
+                    throw new InvalidOperationException(
+                        $"Could not obtain response from the server {response?.StatusCode} {response?.ErrorMessage} {response?.Content}");
+                }
             }
 
             return _cache.Set(identifier, response?.Data?.Content);

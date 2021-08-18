@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kos", "Kos\Kos.csproj", "{83259817-50D0-42B9-BC2D-6370E800425D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kos.Example", "Kos.Example\Kos.Example.csproj", "{C6DD2F2B-4AF4-4533-BE30-0326756E2C7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{83259817-50D0-42B9-BC2D-6370E800425D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83259817-50D0-42B9-BC2D-6370E800425D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83259817-50D0-42B9-BC2D-6370E800425D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6DD2F2B-4AF4-4533-BE30-0326756E2C7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6DD2F2B-4AF4-4533-BE30-0326756E2C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6DD2F2B-4AF4-4533-BE30-0326756E2C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6DD2F2B-4AF4-4533-BE30-0326756E2C7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
