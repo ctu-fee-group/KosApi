@@ -14,7 +14,7 @@ namespace Kos
     /// <summary>
     /// Entity used to interact with kos API
     /// </summary>
-    public class AuthorizedKosApi
+    public class AuthorizedKosApi : IXmlAtomApi
     {
         private readonly ILogger _logger;
         private readonly RestClient _client;
@@ -48,7 +48,7 @@ namespace Kos
         /// Endpoint /students
         /// </summary>
         public KosApiStudents Students => _students ??= new KosApiStudents(_client, _logger);
-        
+
         /// <summary>
         /// Load loadable entity that is obtained using another entity
         /// </summary>
@@ -79,7 +79,7 @@ namespace Kos
             IRestResponse<AtomEntry<T?>>? response = await _client.ExecuteAsync<AtomEntry<T?>>(request, token);
             if (!response.IsSuccessful || response?.Data == null || response.Data.Content == null)
             {
-                _logger.LogWarning(response?.ErrorException, $"Could not obtain kos student information({identifier}): {response?.StatusCode} {response?.ErrorMessage} {response?.Content}");
+                _logger.LogWarning(response?.ErrorException, $"Could not obtain kos api information({identifier}): {response?.StatusCode} {response?.ErrorMessage} {response?.Content}");
             }
             
             return response?.Data?.Content;
