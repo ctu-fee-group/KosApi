@@ -56,7 +56,7 @@ namespace Kos
         /// <param name="token"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public async Task<T?> LoadEntityAsync<T>(KosLoadableEntity<T>? kosLoadable,
+        public async Task<T?> LoadEntityAsync<T>(AtomLoadableEntity<T>? kosLoadable,
             CancellationToken token = default)
             where T : class, new()
         {
@@ -65,7 +65,7 @@ namespace Kos
                 _logger.LogWarning($"Cannot obtain href from {typeof(T).FullName} loadable");
                 return default;
             }
-            
+
             IRestRequest request =
                 new RestRequest(kosLoadable.Href,
                     Method.GET);

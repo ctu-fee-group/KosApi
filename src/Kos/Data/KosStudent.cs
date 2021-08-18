@@ -18,15 +18,15 @@ namespace Kos.Data
         [property: XmlElement("lastName")] string LastName,
         [property: XmlElement("personalNumber")]
         string PersonalNumber,
-        [property: XmlElement("programme")] KosLoadableEntity<KosProgramme>? Programme,
+        [property: XmlElement("programme")] AtomLoadableEntity<KosProgramme>? Programme,
         [property: XmlElement("endDate")] DateTime? EndDate,
         //[property: XmlElement("studyForm")] KosStudyForm StudyForm,
         [property: XmlElement("studyGroup")] ushort? StudyGroup,
         //[property: XmlElement("studyPlan")] KosLoadableEntity<KosStudyPlan> StudyPlan,
         //[property: XmlElement("studyState")] KosStudyState StudyState,
-        [property: XmlElement("supervisor")] KosLoadableEntity<KosTeacher>? Supervisor,
+        [property: XmlElement("supervisor")] AtomLoadableEntity<KosTeacher>? Supervisor,
         [property: XmlElement("supervisorSpecialist")]
-        KosLoadableEntity<KosTeacher>? SupervisorSpecialist,
+        AtomLoadableEntity<KosTeacher>? SupervisorSpecialist,
         //[property: XmlElement("studyTerminationReason")] KosStudyTermination? StudyTerminationReason,
         [property: XmlElement("titlesPost")] string? TitlesPost,
         [property: XmlElement("titlesPre")] string? TitlesPre,

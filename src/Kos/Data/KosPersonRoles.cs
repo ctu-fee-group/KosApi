@@ -5,8 +5,8 @@ using Kos.Atom;
 namespace Kos.Data
 {
     public record KosPersonRoles(
-        [property: XmlElement("student")] List<KosLoadableEntity<KosStudent>> Students,
-        [property: XmlElement("teacher")] KosLoadableEntity<KosTeacher>? Teacher)
+        [property: XmlElement("student")] List<AtomLoadableEntity<KosStudent>> Students,
+        [property: XmlElement("teacher")] AtomLoadableEntity<KosTeacher>? Teacher)
     {
         public KosPersonRoles()
             : this(default!, null)

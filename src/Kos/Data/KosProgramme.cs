@@ -12,8 +12,8 @@ namespace Kos.Data
         [property: XmlElement("code")] string Code,
         [property: XmlElement("description")] string Description,
         [property: XmlElement("diplomaName")] string DiplomaName,
-        [property: XmlElement("division")] KosLoadableEntity<KosDivision> Division,
-        [property: XmlElement("guarantor")] KosLoadableEntity<KosTeacher> Guarantor,
+        [property: XmlElement("division")] AtomLoadableEntity<KosDivision> Division,
+        [property: XmlElement("guarantor")] AtomLoadableEntity<KosTeacher> Guarantor,
         [property: XmlElement("name")] string Name,
         [property: XmlElement("openForAdmission")]
         bool OpenForAdmission,

@@ -5,7 +5,7 @@ namespace Kos.Data
 {
     [XmlType("teacher", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record KosTeacher(
-        [property: XmlElement("division")] KosLoadableEntity<KosDivision>? Division,
+        [property: XmlElement("division")] AtomLoadableEntity<KosDivision>? Division,
         [property: XmlElement("email")] string? Email,
         [property: XmlElement("extern")] bool Extern,
         [property: XmlElement("firstName")] string FirstName,
