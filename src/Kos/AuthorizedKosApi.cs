@@ -16,7 +16,7 @@ namespace Kos
     /// <summary>
     /// Entity used to interact with kos API
     /// </summary>
-    public class AuthorizedKosApi : IXmlAtomApi
+    public class AuthorizedKosApi : IXmlAtomApi, IDisposable
     {
         private readonly ILogger _logger;
         private readonly RestClient _client;
@@ -115,6 +115,11 @@ namespace Kos
             }
 
             return _cache.Set(identifier, response?.Data?.Content);
+        }
+
+        public void Dispose()
+        {
+            _cache.Dispose();
         }
     }
 }
