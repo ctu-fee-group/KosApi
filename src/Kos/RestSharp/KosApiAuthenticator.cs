@@ -1,7 +1,7 @@
 using RestSharp;
 using RestSharp.Authenticators;
 
-namespace Kos
+namespace Kos.RestSharp
 {
     /// <summary>
     /// Authenticator using access_token as GET parameter

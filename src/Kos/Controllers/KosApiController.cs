@@ -1,16 +1,13 @@
-using System.Collections.Generic;
-using Kos.Data;
 using Microsoft.Extensions.Logging;
-using RestSharp;
 
-namespace Kos
+namespace Kos.Controllers
 {
     public abstract class KosApiController
     {
         protected readonly ILogger _logger;
-        protected readonly IXmlAtomApi _atomApi;
+        protected readonly IKosAtomApi _atomApi;
 
-        internal KosApiController(IXmlAtomApi atomApi, ILogger logger)
+        internal KosApiController(IKosAtomApi atomApi, ILogger logger)
         {
             _logger = logger;
             _atomApi = atomApi;
