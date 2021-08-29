@@ -9,13 +9,13 @@ namespace Kos.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddKosApiFactory(this IServiceCollection collection)
+        public static IServiceCollection AddScopedKosApiFactory(this IServiceCollection collection)
         {
             collection
                 .AddOptions<KosApiOptions>();
             
             collection
-                .TryAddSingleton<IKosAtomApiFactory, KosApiFactory>();
+                .TryAddScoped<IKosAtomApiFactory, KosApiFactory>();
 
             return collection;
         }
@@ -23,7 +23,7 @@ namespace Kos.Extensions
         public static IServiceCollection AddScopedKosApi(this IServiceCollection collection, Func<IServiceProvider, string> getToken)
         {
             collection
-                .AddKosApiFactory();
+                .AddScopedKosApiFactory();
 
             collection
                 .AddScoped<IKosAtomApi>(p => p.GetRequiredService<IKosAtomApiFactory>().CreateApi(getToken(p)))
@@ -32,14 +32,14 @@ namespace Kos.Extensions
             return collection;
         }
         
-        public static IServiceCollection AddKosCaching(this IServiceCollection collection)
+        public static IServiceCollection AddScopedKosCaching(this IServiceCollection collection)
         {
 
             collection
-                .TryAddSingleton<KosCacheService>();
+                .TryAddScoped<KosCacheService>();
 
             collection
-                .Replace(ServiceDescriptor.Singleton<IKosAtomApiFactory, CachingKosApiFactory>());
+                .Replace(ServiceDescriptor.Scoped<IKosAtomApiFactory, CachingKosApiFactory>());
 
             return collection;
         }
