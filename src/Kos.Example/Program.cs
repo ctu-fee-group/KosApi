@@ -64,7 +64,7 @@ namespace Kos.Example
                 .AddScopedKosApiFactory()
                 // Replaces IKosAtomApiFactory with caching counterpart that will get IMemoryCache
                 .AddScoped<IMemoryCache, MemoryCache>() // Scoped so each scope will have its own memory cache
-                .AddKosCaching()
+                .AddScopedKosCaching()
                 // Adds scoped api that will get the token by provided way
                 .AddScopedKosApi(p =>
                     p.GetRequiredService<IOptions<AuthOptions>>().Value.AccessToken ??
