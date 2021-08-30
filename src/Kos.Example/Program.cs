@@ -61,7 +61,7 @@ namespace Kos.Example
                     .AddConsole())
 
                 // Adds IKosAtomApiFactory
-                .AddKosApiFactory()
+                .AddScopedKosApiFactory()
                 // Replaces IKosAtomApiFactory with caching counterpart that will get IMemoryCache
                 .AddScoped<IMemoryCache, MemoryCache>() // Scoped so each scope will have its own memory cache
                 .AddKosCaching()
