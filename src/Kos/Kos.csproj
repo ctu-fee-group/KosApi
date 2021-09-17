@@ -3,6 +3,13 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
+        <PackageId>KosApi</PackageId>
+        <PackageVersion>0.0.1</PackageVersion>
+        <Title>KOS Api</Title>
+        <PackageProjectUrl>https://github.com/ctu-fee-group/KosApi</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/ctu-fee-group/KosApi/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/ctu-fee-group/KosApi</RepositoryUrl>
+        <Authors>ctu-fee-group</Authors>
     </PropertyGroup>
 
     <ItemGroup>
