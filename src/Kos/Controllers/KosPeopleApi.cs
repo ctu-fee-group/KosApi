@@ -1,3 +1,9 @@
+//
+//  KosPeopleApi.cs
+//
+//  Copyright (c) Christofel authors. All rights reserved.
+//  Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
 using System.Threading;
 using System.Threading.Tasks;
 using Kos.Abstractions;
@@ -7,26 +13,30 @@ using Microsoft.Extensions.Logging;
 
 namespace Kos.Controllers
 {
-    public class KosPeopleApi : KosApiController, IKosPeopleApi
+    /// <inheritdoc />
+    public class KosPeopleApi : IKosPeopleApi
     {
-        public KosPeopleApi(IKosAtomApi atomApi, ILogger<KosPeopleApi> logger)
-            : base(atomApi, logger)
-        {
-        }
+        private readonly IKosAtomApi _atomApi;
 
         /// <summary>
-        /// Call /people/{username} and return its response
+        /// Initializes a new instance of the <see cref="KosPeopleApi"/> class.
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="token"></param>
-        /// <returns>Null in case of an error</returns>
-        public Task<KosPerson?> GetPersonAsync(string username, CancellationToken token = default)
+        /// <param name="atomApi">The atom api used for loading entities.</param>
+        public KosPeopleApi(IKosAtomApi atomApi)
         {
-            return _atomApi.LoadEntityAsync<KosPerson>(new AtomLoadableEntity<KosPerson>()
+            _atomApi = atomApi;
+        }
+
+        /// <inheritdoc />
+        public Task<KosPerson?> GetPersonAsync
+            (string username, CancellationToken token = default) => _atomApi.LoadEntityAsync<KosPerson>
+        (
+            new AtomLoadableEntity<KosPerson>()
             {
                 Href = $"people/{username}",
                 Title = null
-            }, token);
-        }
+            },
+            token
+        );
     }
 }
