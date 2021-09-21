@@ -16,14 +16,17 @@ namespace Kos.Caching
     public class KosCacheService
     {
         private readonly IMemoryCache _memoryCache;
+        private readonly KosCacheOptions _options;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="KosCacheService"/> class.
         /// </summary>
         /// <param name="memoryCache">The memory cache to store the data in.</param>
-        public KosCacheService(IMemoryCache memoryCache)
+        /// <param name="options">The options.</param>
+        public KosCacheService(IMemoryCache memoryCache, IOptions<KosCacheOptions> options)
         {
             _memoryCache = memoryCache;
+            _options = options.Value;
         }
 
         /// <summary>
@@ -35,7 +38,7 @@ namespace Kos.Caching
         /// <returns>The passed value.</returns>
         public T? Cache<T>(string key, T? value) =>
             _memoryCache.Set
-                (CreateKey(key), value, DateTimeOffset.Now.AddMinutes(5)); // TODO: move 5 minutes to options dependency
+                (CreateKey(key), value, _options.CreateCacheEntryOptions<T>());
 
         /// <summary>
         /// Tries to get the specified value by the key.
