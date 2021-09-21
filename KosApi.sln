@@ -1,8 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kos", "Kos\Kos.csproj", "{83259817-50D0-42B9-BC2D-6370E800425D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kos", "src\Kos\Kos.csproj", "{83259817-50D0-42B9-BC2D-6370E800425D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kos.Example", "Kos.Example\Kos.Example.csproj", "{C6DD2F2B-4AF4-4533-BE30-0326756E2C7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kos.Example", "src\Kos.Example\Kos.Example.csproj", "{C6DD2F2B-4AF4-4533-BE30-0326756E2C7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".metadata", ".metadata", "{C9A38BF0-3FD7-45DA-ABA4-E51600651E77}"
+ProjectSection(SolutionItems) = preProject
+	stylecop.json = stylecop.json
+	stylecop.ruleset = stylecop.ruleset
+	KosApi.sln.DotSettings = KosApi.sln.DotSettings
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
