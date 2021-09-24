@@ -40,6 +40,6 @@ namespace Kos.Atom
         /// May be null if the entity was not found.
         /// </summary>
         [XmlElement("entry")]
-        public List<TContent> Entries { get; set; } = null!;
+        public List<AtomEntry<TContent>> Entries { get; set; } = null!;
     }
 }
