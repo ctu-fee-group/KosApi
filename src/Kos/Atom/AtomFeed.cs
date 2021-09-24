@@ -16,6 +16,7 @@ namespace Kos.Atom
     /// <typeparam name="TContent">The type of the content.</typeparam>
     [XmlRoot("feed", Namespace = "http://www.w3.org/2005/Atom"), Serializable]
     public class AtomFeed<TContent>
+        where TContent : new()
     {
         /// <summary>
         /// Gets or sets the title of the entry.

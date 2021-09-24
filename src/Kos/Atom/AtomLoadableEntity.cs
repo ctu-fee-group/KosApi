@@ -15,7 +15,11 @@ namespace Kos.Atom
     /// <param name="Href"></param>
     /// <param name="Title"></param>
     [Obsolete]
-    public record AtomLoadableEntity(string? Href, string? Title);
+    public record AtomLoadableEntity
+    (
+        [property: XmlAttribute("href", Namespace = "http://www.w3.org/1999/xlink")] string? Href,
+        [property: XmlText] string? Title
+    );
 
     /// <summary>
     /// Represents reference to an entity that can be loaded using the Atom Api.
@@ -26,7 +30,6 @@ namespace Kos.Atom
 #pragma warning restore 612
         where TContent : new()
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomLoadableEntity{T}"/> class.
         /// </summary>
