@@ -40,7 +40,7 @@ namespace Kos.Atom
         /// <returns>The builder.</returns>
         public RequestQueryBuilder AddParameter(string key, string value)
         {
-            _query.Add(key, value);
+            _query[key] = value;
             return this;
         }
 
