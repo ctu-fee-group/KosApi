@@ -15,12 +15,19 @@ namespace Kos.Atom
     /// <typeparam name="TContent">The type of the content.</typeparam>
     [XmlRoot("entry", Namespace = "http://www.w3.org/2005/Atom"), Serializable]
     public class AtomEntry<TContent>
+        where TContent : new()
     {
         /// <summary>
         /// Gets or sets the title of the entry.
         /// </summary>
         [XmlElement("title")]
         public string Title { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the link for the entry.
+        /// </summary>
+        [XmlElement("link")]
+        public AtomLink Link { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the id of the entry.

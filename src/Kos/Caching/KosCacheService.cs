@@ -5,6 +5,8 @@
 //  Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
+using Kos.Atom;
+using Kos.Data;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
@@ -32,26 +34,27 @@ namespace Kos.Caching
         /// <summary>
         /// Cache the given item.
         /// </summary>
-        /// <param name="key">The key to cache with.</param>
         /// <param name="value">The value to cache.</param>
+        /// <param name="id">The key of the entry to cache, if we know it.</param>
         /// <typeparam name="T">The type of the value.</typeparam>
         /// <returns>The passed value.</returns>
-        public T? Cache<T>(string key, T? value) =>
-            _memoryCache.Set
-                (CreateKey(key), value, _options.CreateCacheEntryOptions<T>());
+        public AtomEntry<T>? CacheEntry<T>(AtomEntry<T>? value, string? id)
+            where T : new()
+            => _memoryCache.Set($"Kos/{CreateKey<T>(value, id)}", value, _options.CreateCacheEntryOptions<T>());
 
         /// <summary>
         /// Tries to get the specified value by the key.
         /// </summary>
-        /// <param name="key">The key.</param>
+        /// <param name="id">The id of the entry.</param>
         /// <param name="value">The value if if was found.</param>
         /// <typeparam name="T">The type of the entity.</typeparam>
         /// <returns>Whether the item exists in the cache.</returns>
-        public bool TryGetValue<T>(string key, out T? value)
+        public bool TryGetEntry<T>(string id, out AtomEntry<T>? value)
+            where T : new()
         {
-            if (_memoryCache.TryGetValue(CreateKey(key), out var val))
+            if (_memoryCache.TryGetValue($"Kos/{CreateKey(id)}", out var val))
             {
-                value = (T?)val;
+                value = (AtomEntry<T>?)val;
                 return true;
             }
 
@@ -59,6 +62,22 @@ namespace Kos.Caching
             return false;
         }
 
-        private string CreateKey(string key) => "Kos" + key;
+        private string CreateKey(string id) => id.Trim('/');
+
+        private string CreateKey<T>(AtomEntry<T>? entry, string? id)
+            where T : new()
+        {
+            if (id is not null)
+            {
+                return id;
+            }
+
+            if (entry is null)
+            {
+                throw new ArgumentException(nameof(entry));
+            }
+
+            return CreateKey(entry.Link.Href);
+        }
     }
 }

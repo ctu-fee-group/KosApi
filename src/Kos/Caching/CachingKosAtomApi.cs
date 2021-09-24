@@ -63,13 +63,15 @@ namespace Kos.Caching
                 return null;
             }
 
-            if (_cacheService.TryGetValue(kosLoadable.Href, out AtomEntry<T>? cachedValue))
+            if (_cacheService.TryGetEntry(kosLoadable.Href, out AtomEntry<T>? cachedValue))
             {
                 return cachedValue;
             }
 
-            return _cacheService.Cache
-                (kosLoadable.Href, await base.LoadEntryAsync(kosLoadable, configureRequest, token));
+            var entry = await base.LoadEntryAsync(kosLoadable, configureRequest, token);
+            return entry is not null
+                ? _cacheService.CacheEntry(entry, kosLoadable.Href)
+                : null;
         }
 
         /// <inheritdoc />
@@ -77,6 +79,14 @@ namespace Kos.Caching
             (string endpoint, Action<AtomFeedQueryBuilder>? configureRequest = null, CancellationToken token = default)
         {
             var entities = await base.LoadFeedAsync<T>(endpoint, configureRequest, token);
+
+            if (entities?.Entries is not null)
+            {
+                foreach (var entry in entities.Entries)
+                {
+                    _cacheService.CacheEntry(entry, null);
+                }
+            }
 
             return entities;
         }
