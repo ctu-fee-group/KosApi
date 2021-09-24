@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Kos.Abstractions;
@@ -53,7 +54,7 @@ namespace Kos.Controllers
                        }
                    },
                    token
-               ))?.Entries ??
+               ))?.Entries.Select(x => x.Content).ToList() ??
                Array.Empty<KosPerson>();
 
         /// <inheritdoc />
