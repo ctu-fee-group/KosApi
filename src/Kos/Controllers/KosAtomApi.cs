@@ -68,9 +68,9 @@ namespace Kos.Controllers
                 return default;
             }
 
-            var request = ConfigureRequest
+            using var request = ConfigureRequest
                 (new AtomEntryQueryBuilder(kosLoadable.Href, HttpMethod.Get), configureRequest);
-            var response = await ExecuteRequestAsync(request, token);
+            using var response = await ExecuteRequestAsync(request, token);
             if (response is null)
             {
                 return null;
@@ -84,8 +84,8 @@ namespace Kos.Controllers
             (string endpoint, Action<AtomFeedQueryBuilder>? configureRequest = null, CancellationToken token = default)
             where T : class, new()
         {
-            var request = ConfigureRequest(new AtomFeedQueryBuilder(endpoint, HttpMethod.Get), configureRequest);
-            var response = await ExecuteRequestAsync(request, token);
+            using var request = ConfigureRequest(new AtomFeedQueryBuilder(endpoint, HttpMethod.Get), configureRequest);
+            using var response = await ExecuteRequestAsync(request, token);
             if (response is null)
             {
                 return default;
