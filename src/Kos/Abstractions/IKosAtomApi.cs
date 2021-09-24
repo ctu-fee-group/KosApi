@@ -37,7 +37,7 @@ namespace Kos.Abstractions
             where T : class, new();
 
         /// <summary>
-        /// Load the given loadable entry from the api.
+        /// Load the feed on the given endpoint.
         /// </summary>
         /// <param name="endpoint">The endpoint to retrieve.</param>,
         /// <param name="configureRequest">Action for configuring the request.</param>
