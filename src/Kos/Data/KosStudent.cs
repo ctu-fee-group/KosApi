@@ -10,6 +10,24 @@ using Kos.Atom;
 
 namespace Kos.Data
 {
+    /// <summary>
+    /// Represents kos student entity.
+    /// </summary>
+    /// <param name="Email">The email of the student.</param>
+    /// <param name="StartDate">The start date of the studying.</param>
+    /// <param name="FirstName">The first name of the student.</param>
+    /// <param name="Grade">The grade of the student. (Year of study)</param>
+    /// <param name="InterruptedUntil">The date until the study is interrupted.</param>
+    /// <param name="LastName">The last name of the student.</param>
+    /// <param name="PersonalNumber">The personal number of the student.</param>
+    /// <param name="Programme">The programme the user is studying, if any.</param>
+    /// <param name="EndDate">The end date of the studying.</param>
+    /// <param name="StudyGroup">The study group. (Students are separated into groups at the start of the study)</param>
+    /// <param name="Supervisor">The supervisor of the student, if any.</param>
+    /// <param name="SupervisorSpecialist">The specialist supervisor, if any.</param>
+    /// <param name="TitlesPost">The titles behind the name.</param>
+    /// <param name="TitlesPre">The titles in front of the name.</param>
+    /// <param name="Username">The username of the student.</param>
     [XmlType("student", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record KosStudent
     (

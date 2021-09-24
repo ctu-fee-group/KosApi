@@ -4,6 +4,8 @@
 //  Copyright (c) Christofel authors. All rights reserved.
 //  Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Kos.Abstractions;
@@ -28,15 +30,52 @@ namespace Kos.Controllers
         }
 
         /// <inheritdoc />
-        public Task<KosPerson?> GetPersonAsync
-            (string username, CancellationToken token = default) => _atomApi.LoadEntityAsync<KosPerson>
+        public async Task<IReadOnlyList<KosPerson>> GetPeopleAsync
         (
-            new AtomLoadableEntity<KosPerson>()
-            {
-                Href = $"people/{username}",
-                Title = null
-            },
-            token
-        );
+            string? query = null,
+            string orderBy = "id",
+            ushort limit = 10,
+            int offset = 0,
+            CancellationToken token = default
+        )
+            => (IReadOnlyList<KosPerson>?)(await _atomApi.LoadFeedAsync<KosPerson>
+               (
+                   "people",
+                   builder =>
+                   {
+                       builder.WithLimit(limit);
+                       builder.WithOffset(offset);
+                       builder.WithOrderBy(orderBy);
+
+                       if (query is not null)
+                       {
+                           builder.WithQuery(query);
+                       }
+                   },
+                   token
+               ))?.Entries ??
+               Array.Empty<KosPerson>();
+
+        /// <inheritdoc />
+        public Task<KosPerson?> GetPersonAsync
+            (string username, CancellationToken token = default)
+            => GetPersonAsync
+            (
+                new AtomLoadableEntity<KosPerson>
+                {
+                    Href = $"people/{username}",
+                    Title = null,
+                },
+                token
+            );
+
+        /// <inheritdoc />
+        public async Task<KosPerson?> GetPersonAsync
+            (AtomLoadableEntity<KosPerson> loadableEntity, CancellationToken token = default)
+            => (await _atomApi.LoadEntryAsync
+            (
+                loadableEntity,
+                token: token
+            ))?.Content;
     }
 }
