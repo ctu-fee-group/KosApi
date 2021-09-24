@@ -119,8 +119,8 @@ namespace Kos.Controllers
             where T : RequestQueryBuilder
         {
             configureAction?.Invoke(builder);
-            var requestMessage = builder.Build();
             builder.AddParameter("access_token", _tokenProvider.AccessToken);
+            var requestMessage = builder.Build();
 
             return requestMessage;
         }
