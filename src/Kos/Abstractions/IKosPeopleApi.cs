@@ -25,7 +25,7 @@ namespace Kos.Abstractions
         /// <param name="limit">Sets the maximal number of records to return.</param>
         /// <param name="offset">Sets the offset of the first result. orderBy must be set.</param>
         /// <param name="token">The cancellation token for the operation.</param>
-        /// <returns>The loaded person. Null if the person was not found.</returns>
+        /// <returns>The loaded people.</returns>
         public Task<IReadOnlyList<Person>> GetPeopleAsync
         (
             string? query = null,
