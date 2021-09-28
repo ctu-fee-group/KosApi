@@ -1,5 +1,5 @@
 //
-//  KosPerson.cs
+//  Person.cs
 //
 //  Copyright (c) Christofel authors. All rights reserved.
 //  Licensed under the MIT license. See LICENSE file in the project root for full license information.
@@ -19,22 +19,22 @@ namespace Kos.Data
     /// <param name="TitlesPost">The titles after the name.</param>
     /// <param name="Username">The username of the user.</param>
     [XmlType("person", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
-    public record KosPerson
+    public record Person
     (
         [property: XmlElement("firstName")] string FirstName,
         [property: XmlElement("lastName")] string LastName,
         [property: XmlElement("personalNumber")]
         string PersonalNumber,
-        [property: XmlElement("roles")] KosPersonRoles Roles,
+        [property: XmlElement("roles")] PersonRoles Roles,
         [property: XmlElement("titlesPre")] string? TitlesPre,
         [property: XmlElement("titlesPost")] string? TitlesPost,
         [property: XmlElement("username")] string Username
     )
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="KosPerson"/> class.
+        /// Initializes a new instance of the <see cref="Person"/> class.
         /// </summary>
-        public KosPerson()
+        public Person()
             : this(default!, default!, default!, default!, default!, default!, default!)
         {
         }

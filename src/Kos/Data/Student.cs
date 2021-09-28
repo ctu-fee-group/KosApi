@@ -1,5 +1,5 @@
 //
-//  KosStudent.cs
+//  Student.cs
 //
 //  Copyright (c) Christofel authors. All rights reserved.
 //  Licensed under the MIT license. See LICENSE file in the project root for full license information.
@@ -29,46 +29,48 @@ namespace Kos.Data
     /// <param name="TitlesPre">The titles in front of the name.</param>
     /// <param name="Username">The username of the student.</param>
     [XmlType("student", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
-    public record KosStudent
+    public record Student
     (
-
-        // [property: XmlElement("branch")] KosLoadableEntity<KosBranch>? Division,
-        // [property: XmlElement("department")] KosLoadableEntity<KosDepartment>? Department,
+        [property: XmlElement("branch")] AtomLoadableEntity<Branch>? Branch,
+        [property: XmlElement("department")] AtomLoadableEntity<Division>? Department,
         [property: XmlElement("email")] string? Email,
-        [property: XmlElement("startDate")] DateTime StartDate,
-
-        // [property: XmlElement("faculty")] KosLoadableEntity<KosDivision?> Faculty,
-        [property: XmlElement("firstName")] string FirstName,
-        [property: XmlElement("grade")] byte Grade,
+        [property: XmlElement("startDate")] DateTime? StartDate,
+        [property: XmlElement("faculty")] AtomLoadableEntity<Division>? Faculty,
+        [property: XmlElement("firstName")] string? FirstName,
+        [property: XmlElement("grade")] ushort? Grade,
         [property: XmlElement("interruptedUntil")]
         DateTime? InterruptedUntil,
-        [property: XmlElement("lastName")] string LastName,
+        [property: XmlElement("lastName")] string? LastName,
         [property: XmlElement("personalNumber")]
-        string PersonalNumber,
-        [property: XmlElement("programme")] AtomLoadableEntity<KosProgramme>? Programme,
+        string? PersonalNumber,
+        [property: XmlElement("programme")] AtomLoadableEntity<Programme>? Programme,
         [property: XmlElement("endDate")] DateTime? EndDate,
-
-        // [property: XmlElement("studyForm")] KosStudyForm StudyForm,
+        [property: XmlElement("studyForm")] StudyForm? StudyForm,
         [property: XmlElement("studyGroup")] ushort? StudyGroup,
-
-        // [property: XmlElement("studyPlan")] KosLoadableEntity<KosStudyPlan> StudyPlan,
-        // [property: XmlElement("studyState")] KosStudyState StudyState,
-        [property: XmlElement("supervisor")] AtomLoadableEntity<KosTeacher>? Supervisor,
+        [property: XmlElement("studyPlan")] AtomLoadableEntity<StudyPlan>? StudyPlan,
+        [property: XmlElement("studyState")] StudyState? StudyState,
+        [property: XmlElement("supervisor")] AtomLoadableEntity<Teacher>? Supervisor,
         [property: XmlElement("supervisorSpecialist")]
-        AtomLoadableEntity<KosTeacher>? SupervisorSpecialist,
-
-        // [property: XmlElement("studyTerminationReason")] KosStudyTermination? StudyTerminationReason,
+        AtomLoadableEntity<Teacher>? SupervisorSpecialist,
+        [property: XmlElement("studyTerminationReason")] StudyTermination? StudyTerminationReason,
         [property: XmlElement("titlesPost")] string? TitlesPost,
         [property: XmlElement("titlesPre")] string? TitlesPre,
-        [property: XmlElement("username")] string Username
+        [property: XmlElement("username")] string? Username
     )
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="KosStudent"/> class.
+        /// Initializes a new instance of the <see cref="Student"/> class.
         /// </summary>
-        public KosStudent()
+        public Student()
             : this
             (
+                default!,
+                default!,
+                default!,
+                default!,
+                default!,
+                default!,
+                default!,
                 default!,
                 default!,
                 default!,

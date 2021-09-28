@@ -1,5 +1,5 @@
 //
-//  KosProgramme.cs
+//  Programme.cs
 //
 //  Copyright (c) Christofel authors. All rights reserved.
 //  Licensed under the MIT license. See LICENSE file in the project root for full license information.
@@ -24,32 +24,32 @@ namespace Kos.Data
     /// <param name="StudyDuration">The standard duration of the studying.</param>
     /// <param name="ProgrammeType"></param>
     [XmlType("programme", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
-    public record KosProgramme
+    public record Programme
     (
         [property: XmlElement("academicTitle")]
-        string AcademicTitle,
-        [property: XmlElement("capacity")] ushort Capacity,
-
-        // [property: XmlElement("classesLang")] KosClassesLang ClassesLang,
-        [property: XmlElement("code")] string Code,
-        [property: XmlElement("description")] string Description,
-        [property: XmlElement("diplomaName")] string DiplomaName,
-        [property: XmlElement("division")] AtomLoadableEntity<KosDivision> Division,
-        [property: XmlElement("guarantor")] AtomLoadableEntity<KosTeacher> Guarantor,
-        [property: XmlElement("name")] string Name,
+        string? AcademicTitle,
+        [property: XmlElement("capacity")] ushort? Capacity,
+        [property: XmlElement("classesLang")] ClassesLang? ClassesLang,
+        [property: XmlElement("code")] string? Code,
+        [property: XmlElement("description")] string? Description,
+        [property: XmlElement("diplomaName")] string? DiplomaName,
+        [property: XmlElement("division")] AtomLoadableEntity<Division>? Division,
+        [property: XmlElement("guarantor")] AtomLoadableEntity<Teacher>? Guarantor,
+        [property: XmlElement("name")] string? Name,
         [property: XmlElement("openForAdmission")]
-        bool OpenForAdmission,
+        bool? OpenForAdmission,
         [property: XmlElement("studyDuration")]
-        double StudyDuration,
-        [property: XmlElement("type")] KosProgrammeType ProgrammeType
+        double? StudyDuration,
+        [property: XmlElement("type")] ProgrammeType? ProgrammeType
     )
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="KosProgramme"/> class.
+        /// Initializes a new instance of the <see cref="Programme"/> class.
         /// </summary>
-        public KosProgramme()
+        public Programme()
             : this
             (
+                default!,
                 default!,
                 default!,
                 default!,

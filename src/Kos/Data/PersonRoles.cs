@@ -1,5 +1,5 @@
 //
-//  KosPersonRoles.cs
+//  PersonRoles.cs
 //
 //  Copyright (c) Christofel authors. All rights reserved.
 //  Licensed under the MIT license. See LICENSE file in the project root for full license information.
@@ -14,15 +14,15 @@ namespace Kos.Data
     /// Represents the teacher or student roles of the user.
     /// </summary>
     /// <param name="Students">The references to the person's students.</param>
-    /// <param name="Teacher"></param>
-    public record KosPersonRoles(
-        [property: XmlElement("student")] List<AtomLoadableEntity<KosStudent>> Students,
-        [property: XmlElement("teacher")] AtomLoadableEntity<KosTeacher>? Teacher)
+    /// <param name="Teacher">The reference to the peron's teacher object.</param>
+    public record PersonRoles(
+        [property: XmlElement("student")] List<AtomLoadableEntity<Student>> Students,
+        [property: XmlElement("teacher")] AtomLoadableEntity<Teacher>? Teacher)
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="KosPersonRoles"/> class.
+        /// Initializes a new instance of the <see cref="PersonRoles"/> class.
         /// </summary>
-        public KosPersonRoles()
+        public PersonRoles()
             : this(default!, null)
         {
         }
