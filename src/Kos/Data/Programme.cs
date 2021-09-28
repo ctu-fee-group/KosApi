@@ -41,7 +41,7 @@ namespace Kos.Data
         [property: XmlElement("studyDuration")]
         double? StudyDuration,
         [property: XmlElement("type")] ProgrammeType? ProgrammeType
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Programme"/> class.

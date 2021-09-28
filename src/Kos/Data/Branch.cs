@@ -34,7 +34,7 @@ namespace Kos.Data
         [property: XmlElement("name")] string? Name,
         [property: XmlElement("openForAdmission")]
         bool? OpenForAdmission
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Branch"/> class.

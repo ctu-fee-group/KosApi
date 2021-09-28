@@ -70,7 +70,7 @@ namespace Kos.Data
         [property: XmlArray("subcourses")] List<CourseAtomLoadableEntity> Subcourses,
         [property: XmlElement("tutorialsContents")] string? TutorialsContents,
         [property: XmlElement("instance")] CourseInstance? Instance
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Course"/> class.

@@ -6,6 +6,7 @@
 
 using System;
 using System.Xml.Serialization;
+using Kos.Data;
 
 namespace Kos.Atom
 {
@@ -17,11 +18,19 @@ namespace Kos.Atom
     public class AtomEntry<TContent>
         where TContent : new()
     {
+        private TContent _content = default!;
+
         /// <summary>
         /// Gets or sets the title of the entry.
         /// </summary>
         [XmlElement("title")]
         public string Title { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the author of the entry.
+        /// </summary>
+        [XmlElement("author")]
+        public AtomAuthor Author { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the link for the entry.
@@ -46,6 +55,18 @@ namespace Kos.Atom
         /// May be null if the entity was not found.
         /// </summary>
         [XmlElement("content")]
-        public TContent? Content { get; set; }
+        public TContent Content
+        {
+            get
+            {
+                if (_content is KosContent kosContent)
+                {
+                    kosContent.Id = Id;
+                }
+
+                return _content;
+            }
+            set => _content = value;
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Kos.Data
         [property: XmlElement("description")] string? Description,
         [property: XmlElement("key")] string? Key,
         [property: XmlElement("value")] string? Value
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Parameter"/> class.

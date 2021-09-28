@@ -40,7 +40,7 @@ namespace Kos.Data
         [property: XmlArray("teachers")] List<TeacherAtomLoadableEntity> Teachers,
         [property: XmlElement("timetableSlot")]
         TimetableSlot? TimetableSlot
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Parallel"/> class.

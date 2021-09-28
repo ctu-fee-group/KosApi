@@ -39,7 +39,7 @@ namespace Kos.Data
         List<TeacherAtomLoadableEntity> Instructors,
         [property: XmlArray("lecturers")]
         List<TeacherAtomLoadableEntity> Lecturers
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CourseInstance"/> class.

@@ -21,7 +21,7 @@ namespace Kos.Data
         [property: XmlElement("endDate")] DateTime? EndDate,
         [property: XmlElement("name")] string? Name,
         [property: XmlElement("startDate")] DateTime? StartDate
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Semester"/> class.

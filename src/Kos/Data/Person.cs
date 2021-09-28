@@ -29,7 +29,7 @@ namespace Kos.Data
         [property: XmlElement("titlesPre")] string? TitlesPre,
         [property: XmlElement("titlesPost")] string? TitlesPost,
         [property: XmlElement("username")] string Username
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Person"/> class.

@@ -26,7 +26,7 @@ namespace Kos.Data
         [property: XmlElement("locality")] string? Locality,
         [property: XmlElement("name")] string? Name,
         [property: XmlElement("type")] RoomType? Type
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Gets the examining capacity.

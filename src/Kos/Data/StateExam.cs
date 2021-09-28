@@ -30,7 +30,7 @@ namespace Kos.Data
         [property: XmlElement("signinDeadline")]
         DateTime? SigninDeadline,
         [property: XmlElement("startDate")] DateTime? StartDate
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StateExam"/> class.

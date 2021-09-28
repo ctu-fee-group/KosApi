@@ -32,5 +32,5 @@ namespace Kos.Data
         [property: XmlElement("startTime")] TimeSpan? StartTime,
         [property: XmlElement("endTime")] TimeSpan? EndTime,
         [property: XmlElement("weeks")] string? Weeks
-    );
+    ) : KosContent;
 }

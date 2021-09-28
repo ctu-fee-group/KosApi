@@ -25,7 +25,7 @@ namespace Kos.Data
         [property: XmlElement("name")] string Name,
         [property: XmlElement("parent")] AtomLoadableEntity<Division>? Parent,
         [property: XmlElement("divisionType")] DivisionType Type
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Division"/> class.

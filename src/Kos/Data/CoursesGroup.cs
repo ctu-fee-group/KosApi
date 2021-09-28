@@ -38,5 +38,5 @@ namespace Kos.Data
         [property: XmlElement("note")] string? Note,
         [property: XmlElement("role")] string? Role,
         [property: XmlArray("courses")] List<CourseAtomLoadableEntity> Courses
-    );
+    ) : KosContent;
 }

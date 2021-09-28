@@ -27,5 +27,5 @@ namespace Kos.Data
         [property: XmlElement("description")] string? Description,
         [property: XmlElement("name")] string Name,
         [property: XmlElement("type")] ProgrammeType Type
-    );
+    ) : KosContent;
 }

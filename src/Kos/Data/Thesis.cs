@@ -55,7 +55,7 @@ namespace Kos.Data
         [property: XmlElement("summary")] string? Summary,
         [property: XmlElement("type")] ProgrammeType Type,
         [property: XmlElement("dspaceUrl")] string? DSpaceUrl
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Thesis"/> class.

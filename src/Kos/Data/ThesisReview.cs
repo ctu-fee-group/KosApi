@@ -23,5 +23,5 @@ namespace Kos.Data
         [property: XmlElement("author")] AtomLoadableEntity<Teacher> Author,
         [property: XmlElement("proposedGrade")] string? ProposedGrade,
         [property: XmlElement("documentUrl")] string? DocumentUrl
-    );
+    ) : KosContent;
 }

@@ -25,7 +25,7 @@ namespace Kos.Data
         [property: XmlElement("note")] string? Note,
         [property: XmlElement("programme")] AtomLoadableEntity<Programme>? Programme,
         [property: XmlElement("studyForm")] StudyForm StudyForm
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StudyPlan"/> class.

@@ -49,7 +49,7 @@ namespace Kos.Data
         [property: XmlElement("substitutes")] Permission? Substitutes,
         [property: XmlElement("superior")] AtomLoadableEntity<Exam>? Superior,
         [property: XmlElement("termType")] TermType? TermType
-    )
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Exam"/> class.

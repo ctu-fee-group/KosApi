@@ -15,9 +15,11 @@ namespace Kos.Data
     /// </summary>
     /// <param name="Students">The references to the person's students.</param>
     /// <param name="Teacher">The reference to the peron's teacher object.</param>
-    public record PersonRoles(
+    public record PersonRoles
+    (
         [property: XmlElement("student")] List<AtomLoadableEntity<Student>> Students,
-        [property: XmlElement("teacher")] AtomLoadableEntity<Teacher>? Teacher)
+        [property: XmlElement("teacher")] AtomLoadableEntity<Teacher>? Teacher
+    ) : KosContent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonRoles"/> class.
