@@ -25,6 +25,12 @@ namespace Kos.Atom
         public string Title { get; set; } = null!;
 
         /// <summary>
+        /// Gets or sets the link for the entry.
+        /// </summary>
+        [XmlElement("link")]
+        public AtomLink Next { get; set; } = null!;
+
+        /// <summary>
         /// Gets or sets the id of the entry.
         /// </summary>
         [XmlElement("id")]
