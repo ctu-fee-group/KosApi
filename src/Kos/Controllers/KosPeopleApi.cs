@@ -31,7 +31,7 @@ namespace Kos.Controllers
         }
 
         /// <inheritdoc />
-        public async Task<IReadOnlyList<KosPerson>> GetPeopleAsync
+        public async Task<IReadOnlyList<Person>> GetPeopleAsync
         (
             string? query = null,
             string orderBy = "id",
@@ -39,7 +39,7 @@ namespace Kos.Controllers
             int offset = 0,
             CancellationToken token = default
         )
-            => (IReadOnlyList<KosPerson>?)(await _atomApi.LoadFeedAsync<KosPerson>
+            => (IReadOnlyList<Person>?)(await _atomApi.LoadFeedAsync<Person>
                (
                    "people",
                    builder =>
@@ -55,14 +55,14 @@ namespace Kos.Controllers
                    },
                    token
                ))?.Entries.Select(x => x.Content).ToList() ??
-               Array.Empty<KosPerson>();
+               Array.Empty<Person>();
 
         /// <inheritdoc />
-        public Task<KosPerson?> GetPersonAsync
+        public Task<Person?> GetPersonAsync
             (string username, CancellationToken token = default)
             => GetPersonAsync
             (
-                new AtomLoadableEntity<KosPerson>
+                new AtomLoadableEntity<Person>
                 {
                     Href = $"people/{username}",
                     Title = null,
@@ -71,8 +71,8 @@ namespace Kos.Controllers
             );
 
         /// <inheritdoc />
-        public async Task<KosPerson?> GetPersonAsync
-            (AtomLoadableEntity<KosPerson> loadableEntity, CancellationToken token = default)
+        public async Task<Person?> GetPersonAsync
+            (AtomLoadableEntity<Person> loadableEntity, CancellationToken token = default)
             => (await _atomApi.LoadEntryAsync
             (
                 loadableEntity,

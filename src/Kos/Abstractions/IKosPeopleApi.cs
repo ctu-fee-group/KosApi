@@ -26,7 +26,7 @@ namespace Kos.Abstractions
         /// <param name="offset">Sets the offset of the first result. orderBy must be set.</param>
         /// <param name="token">The cancellation token for the operation.</param>
         /// <returns>The loaded person. Null if the person was not found.</returns>
-        public Task<IReadOnlyList<KosPerson>> GetPeopleAsync
+        public Task<IReadOnlyList<Person>> GetPeopleAsync
         (
             string? query = null,
             string orderBy = "id",
@@ -41,7 +41,7 @@ namespace Kos.Abstractions
         /// <param name="username">The username of the user to get.</param>
         /// <param name="token">The cancellation token for the operation.</param>
         /// <returns>The loaded person. Null if the person was not found.</returns>
-        public Task<KosPerson?> GetPersonAsync(string username, CancellationToken token = default);
+        public Task<Person?> GetPersonAsync(string username, CancellationToken token = default);
 
         /// <summary>
         /// Gets the person from the loadable entity.
@@ -49,7 +49,7 @@ namespace Kos.Abstractions
         /// <param name="loadableEntity">The loadable entity specifying what user to load.</param>
         /// <param name="token">The cancellation token for the operation.</param>
         /// <returns>The loaded person. Null if the person was not found.</returns>
-        public Task<KosPerson?> GetPersonAsync
-            (AtomLoadableEntity<KosPerson> loadableEntity, CancellationToken token = default);
+        public Task<Person?> GetPersonAsync
+            (AtomLoadableEntity<Person> loadableEntity, CancellationToken token = default);
     }
 }
