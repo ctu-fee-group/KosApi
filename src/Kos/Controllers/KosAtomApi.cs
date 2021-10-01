@@ -55,28 +55,35 @@ namespace Kos.Controllers
         }
 
         /// <inheritdoc />
-        public virtual async Task<AtomEntry<T>?> LoadEntryAsync<T>
-        (
-            AtomLoadableEntity<T>? kosLoadable,
-            Action<AtomEntryQueryBuilder>? configureRequest = null,
-            CancellationToken token = default
-        )
-            where T : class, new()
+        public async Task<AtomEntry<TContent>?> LoadEntryAsync<TContent>
+            (string endpoint, Action<AtomEntryQueryBuilder>? configureRequest = null, CancellationToken token = default)
+            where TContent : class, new()
         {
-            if (kosLoadable?.Href is null)
-            {
-                return default;
-            }
-
-            using var request = ConfigureRequest
-                (new AtomEntryQueryBuilder(kosLoadable.Href, HttpMethod.Get), configureRequest);
+            using var request = ConfigureRequest(new AtomEntryQueryBuilder(endpoint, HttpMethod.Get), configureRequest);
             using var response = await ExecuteRequestAsync(request, token);
             if (response is null)
             {
                 return null;
             }
 
-            return await ParseResponseEntity<AtomEntry<T>>(response, token);
+            return await ParseResponseEntity<AtomEntry<TContent>>(response, token);
+        }
+
+        /// <inheritdoc />
+        public virtual Task<AtomEntry<TContent>?> LoadEntryAsync<TContent>
+        (
+            AtomLoadableEntity<TContent>? kosLoadable,
+            Action<AtomEntryQueryBuilder>? configureRequest = null,
+            CancellationToken token = default
+        )
+            where TContent : class, new()
+        {
+            if (kosLoadable?.Href is null)
+            {
+                return Task.FromResult<AtomEntry<TContent>?>(default);
+            }
+
+            return LoadEntryAsync<TContent>(kosLoadable.Href, configureRequest, token);
         }
 
         /// <inheritdoc />

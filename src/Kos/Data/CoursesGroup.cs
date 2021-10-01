@@ -38,5 +38,26 @@ namespace Kos.Data
         [property: XmlElement("note")] string? Note,
         [property: XmlElement("role")] string? Role,
         [property: XmlArray("courses")] List<CourseAtomLoadableEntity> Courses
-    ) : KosContent;
+    ) : KosContent
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoursesGroup"/> class.
+        /// </summary>
+        public CoursesGroup()
+            : this
+            (
+                default!,
+                default!,
+                default!,
+                default!,
+                default!,
+                default!,
+                default!,
+                default!,
+                default!,
+                default!
+            )
+        {
+        }
+    }
 }
