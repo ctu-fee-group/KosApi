@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection.Metadata;
 using System.Text.Json;
 using System.Threading;
@@ -126,8 +127,8 @@ namespace Kos.Controllers
             where T : RequestQueryBuilder
         {
             configureAction?.Invoke(builder);
-            builder.AddParameter("access_token", _tokenProvider.AccessToken);
             var requestMessage = builder.Build();
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _tokenProvider.AccessToken);
 
             return requestMessage;
         }
