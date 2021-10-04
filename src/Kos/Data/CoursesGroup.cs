@@ -22,6 +22,7 @@ namespace Kos.Data
     /// <param name="Note">The note of the course group.</param>
     /// <param name="Role">The role in the study plan.</param>
     /// <param name="Courses">The courses that are part of this</param>
+    [XmlType("coursesGroup", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record CoursesGroup
     (
         [property: XmlElement("approved")] bool? Approved,

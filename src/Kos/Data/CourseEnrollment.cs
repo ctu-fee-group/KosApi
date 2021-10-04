@@ -17,6 +17,7 @@ namespace Kos.Data
     /// <param name="Extern">Unknown.</param>
     /// <param name="Semester">The semester the course was enrolled in.</param>
     /// <param name="Course">The enrolled course.</param>
+    [XmlType("courseEnrollment", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record CourseEnrollment
     (
         [property: XmlElement("assessment")] bool Assessment,

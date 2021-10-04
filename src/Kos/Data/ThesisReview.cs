@@ -16,7 +16,7 @@ namespace Kos.Data
     /// <param name="Author">The author of the review.</param>
     /// <param name="ProposedGrade">The grade that is proposed (A - F)</param>
     /// <param name="DocumentUrl">The url to pdf document with the review.</param>
-    [XmlType("thesisreview", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
+    [XmlType("thesisReview", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record ThesisReview
     (
         [property: XmlElement("thesis")] AtomLoadableEntity<Thesis> Thesis,

@@ -18,7 +18,7 @@ namespace Kos.Data
     /// <param name="Description">The description of the thesis.</param>
     /// <param name="Name">The name of the thesis.</param>
     /// <param name="Type">The type of the programme the thesis is for.</param>
-    [XmlType("thesisdraft", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
+    [XmlType("thesisDraft", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record ThesisDraft
     (
         [property: XmlElement("branch")] AtomLoadableEntity<Branch>? Branch,

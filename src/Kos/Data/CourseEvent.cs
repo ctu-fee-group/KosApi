@@ -25,6 +25,7 @@ namespace Kos.Data
     /// <param name="Semester"></param>
     /// <param name="SigninDeadline"></param>
     /// <param name="StartDate"></param>
+    [XmlType("courseEvent", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record CourseEvent
     (
         [property: XmlElement("branch")] AtomLoadableEntity<Branch>? Branch,
