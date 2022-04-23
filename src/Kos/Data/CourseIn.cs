@@ -9,6 +9,7 @@ using Kos.Atom;
 
 namespace Kos.Data
 {
+    [XmlType("coursein", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record CourseIn
         ([property: XmlElement("course")] AtomLoadableEntity<Course> Course) : CourseInstance
     {

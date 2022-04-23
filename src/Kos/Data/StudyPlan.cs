@@ -10,7 +10,7 @@ using Kos.Atom;
 
 namespace Kos.Data
 {
-    [XmlType("studyplan", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
+    [XmlType("studyPlan", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record StudyPlan
     (
         [property: XmlElement("approvalDate")] DateTime? ApprovalDate,

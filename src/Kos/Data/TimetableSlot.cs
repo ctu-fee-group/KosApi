@@ -21,7 +21,7 @@ namespace Kos.Data
     /// <param name="StartTime">The time of day this slot starts at.</param>
     /// <param name="EndTime">The time of the day this slot ends at.</param>
     /// <param name="Weeks">What weeks is this slot in.</param>
-    [XmlType("timetableslot", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
+    [XmlType("timetableSlot", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record TimetableSlot
     (
         [property: XmlElement("day")] ushort? Day,

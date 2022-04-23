@@ -19,7 +19,7 @@ namespace Kos.Data
     /// <param name="ProgrammeType">The type of the programme this state exam is for.</param>
     /// <param name="SigninDeadline">The deadline for sign ins.</param>
     /// <param name="StartDate">The start date of the exam.</param>
-    [XmlType("stateexam", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
+    [XmlType("stateExam", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record StateExam
     (
         [property: XmlElement("branch")] AtomLoadableEntity<Branch>? Branch,

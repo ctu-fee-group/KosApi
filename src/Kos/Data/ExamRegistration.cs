@@ -13,6 +13,7 @@ namespace Kos.Data
     /// Represents kos exam registration entity.
     /// </summary>
     /// <param name="Exam">The registered exam term.</param>
+    [XmlType("examRegistration", Namespace = "http://kosapi.feld.cvut.cz/schema/3")]
     public record ExamRegistration
     (
         [property: XmlElement("exam")] AtomLoadableEntity<Exam> Exam

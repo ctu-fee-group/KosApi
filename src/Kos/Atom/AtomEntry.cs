@@ -5,6 +5,7 @@
 //  Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
+using System.Linq;
 using System.Xml.Serialization;
 using Kos.Data;
 
@@ -61,7 +62,7 @@ namespace Kos.Atom
             {
                 if (_content is KosContent kosContent)
                 {
-                    kosContent.Id = Id;
+                    kosContent.Id = Id.Split(':').Last();
                 }
 
                 return _content;

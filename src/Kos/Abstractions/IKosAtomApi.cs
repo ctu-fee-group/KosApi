@@ -23,18 +23,37 @@ namespace Kos.Abstractions
         /// <remarks>
         /// Loadable entry is usually obtained as a reference from another loaded entry.
         /// </remarks>
-        /// <param name="kosLoadable">The entity to be loaded.</param>,
+        /// <param name="endpoint">The endpoint to be called.</param>,
         /// <param name="configureRequest">Action for configuring the request.</param>
         /// <param name="token">The cancellation token for the operation.</param>
-        /// <typeparam name="T">The type of the entity that will be loaded.</typeparam>
+        /// <typeparam name="TContent">The type of the entity that will be loaded.</typeparam>
         /// <returns>The loaded entity. If not found, null.</returns>
-        public Task<AtomEntry<T>?> LoadEntryAsync<T>
+        public Task<AtomEntry<TContent>?> LoadEntryAsync<TContent>
         (
-            AtomLoadableEntity<T>? kosLoadable,
+            string endpoint,
             Action<AtomEntryQueryBuilder>? configureRequest = null,
             CancellationToken token = default
         )
-            where T : class, new();
+            where TContent : class, new();
+
+        /// <summary>
+        /// Load the given loadable entry from the api.
+        /// </summary>
+        /// <remarks>
+        /// Loadable entry is usually obtained as a reference from another loaded entry.
+        /// </remarks>
+        /// <param name="kosLoadable">The entity to be loaded.</param>,
+        /// <param name="configureRequest">Action for configuring the request.</param>
+        /// <param name="token">The cancellation token for the operation.</param>
+        /// <typeparam name="TContent">The type of the entity that will be loaded.</typeparam>
+        /// <returns>The loaded entity. If not found, null.</returns>
+        public Task<AtomEntry<TContent>?> LoadEntryAsync<TContent>
+        (
+            AtomLoadableEntity<TContent>? kosLoadable,
+            Action<AtomEntryQueryBuilder>? configureRequest = null,
+            CancellationToken token = default
+        )
+            where TContent : class, new();
 
         /// <summary>
         /// Load the feed on the given endpoint.

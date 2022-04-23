@@ -17,7 +17,7 @@ namespace Kos.Atom
     [Obsolete]
     public record AtomLoadableEntity
     (
-        [property: XmlAttribute("href", Namespace = "http://www.w3.org/1999/xlink")] string? Href,
+        [property: XmlAttribute("href", Namespace = "http://www.w3.org/1999/xlink")] string Href,
         [property: XmlText] string? Title
     );
 

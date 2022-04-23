@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Kos.Abstractions;
 using Kos.Atom;
 using Kos.Data;
+using Kos.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace Kos.Controllers
@@ -31,7 +32,7 @@ namespace Kos.Controllers
         }
 
         /// <inheritdoc />
-        public async Task<IReadOnlyList<Person>> GetPeopleAsync
+        public Task<IReadOnlyList<Person>> GetPeopleAsync
         (
             string? query = null,
             string orderBy = "id",
@@ -39,36 +40,16 @@ namespace Kos.Controllers
             int offset = 0,
             CancellationToken token = default
         )
-            => (IReadOnlyList<Person>?)(await _atomApi.LoadFeedAsync<Person>
-               (
-                   "people",
-                   builder =>
-                   {
-                       builder.WithLimit(limit);
-                       builder.WithOffset(offset);
-                       builder.WithOrderBy(orderBy);
-
-                       if (query is not null)
-                       {
-                           builder.WithQuery(query);
-                       }
-                   },
-                   token
-               ))?.Entries.Select(x => x.Content).ToList() ??
-               Array.Empty<Person>();
+            => _atomApi.LoadFeedContentAsync<Person>("people", query, orderBy, limit, offset, null, token: token);
 
         /// <inheritdoc />
-        public Task<Person?> GetPersonAsync
+        public async Task<Person?> GetPersonAsync
             (string username, CancellationToken token = default)
-            => GetPersonAsync
+            => (await _atomApi.LoadEntryAsync<Person>
             (
-                new AtomLoadableEntity<Person>
-                {
-                    Href = $"people/{username}",
-                    Title = null,
-                },
-                token
-            );
+                $"people/{username}",
+                token: token
+            ))?.Content;
 
         /// <inheritdoc />
         public async Task<Person?> GetPersonAsync

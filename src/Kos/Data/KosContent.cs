@@ -14,6 +14,6 @@ namespace Kos.Data
         /// <summary>
         /// Gets or sets the id of the record.
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
     }
 }

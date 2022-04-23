@@ -48,6 +48,7 @@ namespace Kos.Extensions
                     {
                         throw new InvalidOperationException("The base url must be set.");
                     }
+
                     client.BaseAddress = new Uri(options.BaseUrl);
                 }
             );
@@ -59,8 +60,33 @@ namespace Kos.Extensions
 
             collection
                 .TryAdd(ServiceDescriptor.Describe(typeof(IKosAtomApi), typeof(IKosAtomApi), lifetime));
+
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosBranchesApi), typeof(KosBranchesApi), lifetime));
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosCoursesApi), typeof(KosCoursesApi), lifetime));
+            collection.TryAdd
+                (ServiceDescriptor.Describe(typeof(IKosCourseEventsApi), typeof(KosCoursesEventsApi), lifetime));
+            collection.TryAdd
+                (ServiceDescriptor.Describe(typeof(IKosCoursesGroupsApi), typeof(KosCoursesGroupsApi), lifetime));
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosDivisionsApi), typeof(KosDivisionsApi), lifetime));
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosDivisionsApi), typeof(KosDivisionsApi), lifetime));
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosExamsApi), typeof(KosExamsApi), lifetime));
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosParallelsApi), typeof(KosParallelsApi), lifetime));
+            collection.TryAdd
+                (ServiceDescriptor.Describe(typeof(IKosParametersApi), typeof(KosParametersApi), lifetime));
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosPathwaysApi), typeof(KosPathwaysApi), lifetime));
             collection
                 .TryAdd(ServiceDescriptor.Describe(typeof(IKosPeopleApi), typeof(KosPeopleApi), lifetime));
+            collection.TryAdd
+                (ServiceDescriptor.Describe(typeof(IKosProgrammesApi), typeof(KosProgrammesApi), lifetime));
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosRoomsApi), typeof(KosRoomsApi), lifetime));
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosSemestersApi), typeof(KosSemestersApi), lifetime));
+            collection.TryAdd
+                (ServiceDescriptor.Describe(typeof(IKosStateExamsApi), typeof(KosStateExamsApi), lifetime));
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosStudentsApi), typeof(KosStudentsApi), lifetime));
+            collection.TryAdd
+                (ServiceDescriptor.Describe(typeof(IKosStudyPlansApi), typeof(KosStudyPlansApi), lifetime));
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosTeachersApi), typeof(KosTeachersApi), lifetime));
+            collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosThesesApi), typeof(KosThesesApi), lifetime));
 
             return collection;
         }

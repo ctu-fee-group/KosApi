@@ -14,6 +14,6 @@ namespace Kos.Atom
         /// <summary>
         /// Gets or sets the name of the author.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
     }
 }
