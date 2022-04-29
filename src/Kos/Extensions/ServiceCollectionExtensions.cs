@@ -59,7 +59,7 @@ namespace Kos.Extensions
                     (ServiceDescriptor.Describe(typeof(TokenProvider), p => new TokenProvider(getToken(p)), lifetime));
 
             collection
-                .TryAdd(ServiceDescriptor.Describe(typeof(IKosAtomApi), typeof(IKosAtomApi), lifetime));
+                .TryAdd(ServiceDescriptor.Describe(typeof(IKosAtomApi), typeof(KosAtomApi), lifetime));
 
             collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosBranchesApi), typeof(KosBranchesApi), lifetime));
             collection.TryAdd(ServiceDescriptor.Describe(typeof(IKosCoursesApi), typeof(KosCoursesApi), lifetime));
