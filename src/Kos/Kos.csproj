@@ -4,7 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <PackageId>KosApi</PackageId>
-        <PackageVersion>1.0.1</PackageVersion>
+        <PackageVersion>1.0.2</PackageVersion>
         <Title>KOS Api</Title>
         <PackageProjectUrl>https://github.com/ctu-fee-group/KosApi</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/ctu-fee-group/KosApi/blob/master/LICENSE</PackageLicenseUrl>
