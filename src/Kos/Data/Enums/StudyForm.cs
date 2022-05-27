@@ -42,5 +42,23 @@ namespace Kos.Data
         /// </summary>
         [XmlEnum("UNDEFINED")]
         Undefined,
+
+        /// <summary>
+        /// Short stay attendance.
+        /// </summary>
+        [XmlEnum("V")]
+        ShortStayAttendance,
+
+        /// <summary>
+        /// Short stay distant.
+        /// </summary>
+        [XmlEnum("W")]
+        ShortStayCombined,
+
+        /// <summary>
+        /// Short stay.
+        /// </summary>
+        [XmlEnum("Z")]
+        ShortStay,
     }
 }
