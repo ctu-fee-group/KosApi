@@ -5,6 +5,8 @@
 //  Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Kos.Abstractions;
 using Kos.Caching;
@@ -35,6 +37,23 @@ namespace Kos.Extensions
             Action<IHttpClientBuilder>? configureClient = null,
             ServiceLifetime lifetime = ServiceLifetime.Singleton
         )
+            => AddKosApi(collection, (p, ct) => Task.FromResult(getToken(p)), configureClient, lifetime);
+
+        /// <summary>
+        /// Adds kos api as a scoped service.
+        /// </summary>
+        /// <param name="collection">The collection to configure.</param>
+        /// <param name="getToken">The function that obtains the access token.</param>
+        /// <param name="configureClient">The action used for configuring the http client.</param>
+        /// <param name="lifetime">The lifetime of the service.</param>
+        /// <returns>The passed collection.</returns>
+        public static IServiceCollection AddKosApi
+        (
+            this IServiceCollection collection,
+            Func<IServiceProvider, CancellationToken, Task<string>> getToken,
+            Action<IHttpClientBuilder>? configureClient = null,
+            ServiceLifetime lifetime = ServiceLifetime.Singleton
+        )
         {
             collection.TryAddSingleton<XmlSerializerFactory>();
 
@@ -56,7 +75,7 @@ namespace Kos.Extensions
 
             collection
                 .TryAdd
-                    (ServiceDescriptor.Describe(typeof(TokenProvider), p => new TokenProvider(getToken(p)), lifetime));
+                    (ServiceDescriptor.Describe(typeof(TokenProvider), p => new TokenProvider(p, getToken), lifetime));
 
             collection
                 .TryAdd(ServiceDescriptor.Describe(typeof(IKosAtomApi), typeof(KosAtomApi), lifetime));

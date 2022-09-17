@@ -60,7 +60,8 @@ namespace Kos.Controllers
             (string endpoint, Action<AtomEntryQueryBuilder>? configureRequest = null, CancellationToken token = default)
             where TContent : class, new()
         {
-            using var request = ConfigureRequest(new AtomEntryQueryBuilder(endpoint, HttpMethod.Get), configureRequest);
+            using var request = await ConfigureRequest
+                (new AtomEntryQueryBuilder(endpoint, HttpMethod.Get), configureRequest, token);
             using var response = await ExecuteRequestAsync(request, token);
             if (response is null)
             {
@@ -92,7 +93,8 @@ namespace Kos.Controllers
             (string endpoint, Action<AtomFeedQueryBuilder>? configureRequest = null, CancellationToken token = default)
             where T : class, new()
         {
-            using var request = ConfigureRequest(new AtomFeedQueryBuilder(endpoint, HttpMethod.Get), configureRequest);
+            using var request = await ConfigureRequest
+                (new AtomFeedQueryBuilder(endpoint, HttpMethod.Get), configureRequest, token);
             using var response = await ExecuteRequestAsync(request, token);
             if (response is null)
             {
@@ -122,13 +124,14 @@ namespace Kos.Controllers
             }
         }
 
-        private HttpRequestMessage ConfigureRequest<T>
-            (T builder, Action<T>? configureAction)
+        private async Task<HttpRequestMessage> ConfigureRequest<T>
+            (T builder, Action<T>? configureAction, CancellationToken token)
             where T : RequestQueryBuilder
         {
             configureAction?.Invoke(builder);
             var requestMessage = builder.Build();
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _tokenProvider.AccessToken);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue
+                ("Bearer", await _tokenProvider.GetAccessTokenAsync(token));
 
             return requestMessage;
         }
