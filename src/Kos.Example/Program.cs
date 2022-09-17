@@ -44,8 +44,8 @@ namespace Kos.Example
                 Console.WriteLine($"Found person {person.FirstName} {person.LastName}");
 
                 // Load associated teacher entity using generic loading mechanism
-                var student = await loadableApi.LoadEntityAsync(person.Roles.Students.FirstOrDefault());
-                var teacher = await loadableApi.LoadEntityAsync(person.Roles.Teacher);
+                var student = await loadableApi.LoadEntryAsync(person.Roles.Students.FirstOrDefault());
+                var teacher = await loadableApi.LoadEntryAsync(person.Roles.Teacher);
             }
             else
             {
@@ -53,7 +53,7 @@ namespace Kos.Example
             }
 
             // Obtained from cache
-            person = await peopleApi.GetPersonAsync("bohacfr2");
+            person = await peopleApi.GetPersonAsync("username");
         }
 
         private static IServiceProvider CreateServices()
@@ -65,20 +65,24 @@ namespace Kos.Example
             return new ServiceCollection()
 
                 // Logging is needed in case of errors
-                .AddLogging(builder => builder
-                    .AddConsole())
-
-                // Adds IKosAtomApiFactory
-                .AddScopedKosApiFactory()
+                .AddLogging
+                (
+                    builder => builder
+                        .AddConsole()
+                )
 
                 // Replaces IKosAtomApiFactory with caching counterpart that will get IMemoryCache
                 .AddScoped<IMemoryCache, MemoryCache>() // Scoped so each scope will have its own memory cache
-                .AddScopedKosCaching()
+                .AddKosCaching(ServiceLifetime.Scoped)
 
                 // Adds scoped api that will get the token by provided way
-                .AddScopedKosApi(p =>
-                    p.GetRequiredService<IOptions<AuthOptions>>().Value.AccessToken ??
-                    throw new InvalidOperationException("Token was not provided"))
+                .AddKosApi
+                (
+                    p =>
+                        p.GetRequiredService<IOptions<AuthOptions>>().Value.AccessToken
+                        ?? throw new InvalidOperationException("Token was not provided"),
+                    lifetime: ServiceLifetime.Scoped
+                )
 
                 // Configure options needed for kos api
                 .Configure<KosApiOptions>(config.GetSection("Kos"))
