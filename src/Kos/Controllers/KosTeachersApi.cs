@@ -78,7 +78,7 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<Course>
-                ($"{teacherLoadableEntity.Href}/courses", query, orderBy, limit, offset, lang, token: token);
+                ($"{teacherLoadableEntity.Href}courses", query, orderBy, limit, offset, lang, token: token);
 
         /// <inheritdoc />
         public Task<IReadOnlyList<Exam>> GetTeacherExams
@@ -108,6 +108,6 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<Exam>
-                ($"{teacherLoadableEntity.Href}/exams", query, orderBy, limit, offset, lang, token: token);
+                ($"{teacherLoadableEntity.Href}exams", query, orderBy, limit, offset, lang, token: token);
     }
 }

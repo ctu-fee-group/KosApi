@@ -76,7 +76,7 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<Division>
-                ($"{courseLoadableEntity.Href}/courses", query, orderBy, limit, offset, lang, token: token);
+                ($"{courseLoadableEntity.Href}courses", query, orderBy, limit, offset, lang, token: token);
 
         /// <inheritdoc />
         public Task<IReadOnlyList<Division>> GetDivisionSubdivisions
@@ -104,7 +104,7 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<Division>
-                ($"{subdivisionLoadableEntity.Href}/subdivisions", query, orderBy, limit, offset, lang, token: token);
+                ($"{subdivisionLoadableEntity.Href}subdivisions", query, orderBy, limit, offset, lang, token: token);
 
         /// <inheritdoc />
         public Task<IReadOnlyList<Division>> GetDivisionTeachers
@@ -132,6 +132,6 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<Division>
-                ($"{teacherLoadableEntity.Href}/teachers", query, orderBy, limit, offset, lang, token: token);
+                ($"{teacherLoadableEntity.Href}teachers", query, orderBy, limit, offset, lang, token: token);
     }
 }

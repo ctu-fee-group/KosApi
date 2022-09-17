@@ -76,6 +76,6 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<Exam>
-                ($"{examLoadableEntity.Href}/attendees", query, orderBy, limit, offset, lang, token: token);
+                ($"{examLoadableEntity.Href}attendees", query, orderBy, limit, offset, lang, token: token);
     }
 }

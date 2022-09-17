@@ -63,7 +63,7 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<StudyPlan>
-                ($"{branchLoadableEntity.Href}/studyPlans", query, orderBy, limit, offset, lang, token: token);
+                ($"{branchLoadableEntity.Href}studyPlans", query, orderBy, limit, offset, lang, token: token);
 
         /// <inheritdoc />
         public Task<IReadOnlyList<StudyPlan>> GetBranchStudyPlans

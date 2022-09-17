@@ -166,7 +166,7 @@ namespace Kos.Controllers
         )
             => _atomApi.LoadFeedContentAsync<CourseEvent>
             (
-                $"{courseLoadableEntity.Href}/events",
+                $"{courseLoadableEntity.Href}events",
                 query,
                 orderBy,
                 limit,
@@ -226,7 +226,7 @@ namespace Kos.Controllers
         )
             => _atomApi.LoadFeedContentAsync<Exam>
             (
-                $"{courseLoadableEntity.Href}/exams",
+                $"{courseLoadableEntity.Href}exams",
                 query,
                 orderBy,
                 limit,
@@ -286,7 +286,7 @@ namespace Kos.Controllers
         )
             => _atomApi.LoadFeedContentAsync<Parallel>
             (
-                $"{courseLoadableEntity.Href}/parallels",
+                $"{courseLoadableEntity.Href}parallels",
                 query,
                 orderBy,
                 limit,
@@ -346,7 +346,7 @@ namespace Kos.Controllers
         )
             => _atomApi.LoadFeedContentAsync<Student>
             (
-                $"{courseLoadableEntity.Href}/students",
+                $"{courseLoadableEntity.Href}students",
                 query,
                 orderBy,
                 limit,
@@ -397,7 +397,7 @@ namespace Kos.Controllers
         )
             => _atomApi.LoadFeedContentAsync<CourseIn>
             (
-                $"{courseLoadableEntity.Href}/instances",
+                $"{courseLoadableEntity.Href}instances",
                 query,
                 orderBy,
                 limit,
@@ -441,7 +441,7 @@ namespace Kos.Controllers
         )
             => _atomApi.LoadFeedContentAsync<Branch>
             (
-                $"{courseLoadableEntity.Href}/branches",
+                $"{courseLoadableEntity.Href}branches",
                 query,
                 orderBy,
                 limit,
