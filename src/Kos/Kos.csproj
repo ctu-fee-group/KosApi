@@ -4,15 +4,14 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <PackageId>KosApi</PackageId>
-        <PackageVersion>1.2.0</PackageVersion>
+        <PackageVersion>1.2.1</PackageVersion>
         <Title>KOS Api</Title>
         <PackageProjectUrl>https://github.com/ctu-fee-group/KosApi</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/ctu-fee-group/KosApi/blob/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/ctu-fee-group/KosApi</RepositoryUrl>
         <Authors>ctu-fee-group</Authors>
         <LangVersion>10</LangVersion>
-        <PackageReleaseNotes>Add Code to Semester object.
-Add methods for obtaining previous and next semester inside of SemesterFilter.</PackageReleaseNotes>
+        <PackageReleaseNotes>Fix that students api did not include semester query parameter.</PackageReleaseNotes>
         <AssemblyVersion>1.1.1</AssemblyVersion>
         <FileVersion>1.1.1</FileVersion>
     </PropertyGroup>
