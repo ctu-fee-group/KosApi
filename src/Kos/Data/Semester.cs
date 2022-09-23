@@ -20,6 +20,7 @@ namespace Kos.Data
     (
         [property: XmlElement("endDate")] DateTime? EndDate,
         [property: XmlElement("name")] string? Name,
+        [property: XmlElement("code")] string Code,
         [property: XmlElement("startDate")] DateTime? StartDate
     ) : KosContent
     {
@@ -29,6 +30,7 @@ namespace Kos.Data
         public Semester()
             : this
             (
+                default!,
                 default!,
                 default!,
                 default!
