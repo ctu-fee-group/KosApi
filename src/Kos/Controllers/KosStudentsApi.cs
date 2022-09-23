@@ -39,7 +39,16 @@ namespace Kos.Controllers
             string? lang = null,
             CancellationToken token = default
         )
-            => _atomApi.LoadFeedContentAsync<Student>("students", query, orderBy, limit, offset, lang, token: token);
+            => _atomApi.LoadFeedContentAsync<Student>
+            (
+                "students",
+                query,
+                orderBy,
+                limit,
+                offset,
+                lang,
+                token: token
+            );
 
         /// <inheritdoc />
         public Task<Student?> GetStudent
@@ -64,7 +73,22 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<CourseEnrollment>
-                ($"students/{studyCodeOrId}/enrolledCourses", query, orderBy, limit, offset, lang, token: token);
+            (
+                $"students/{studyCodeOrId}/enrolledCourses",
+                query,
+                orderBy,
+                limit,
+                offset,
+                lang,
+                b =>
+                {
+                    if (semester is not null)
+                    {
+                        b.AddParameter("sem", semester);
+                    }
+                },
+                token
+            );
 
         /// <inheritdoc />
         public Task<IReadOnlyList<CourseEnrollment>> GetStudentEnrolledCourses
@@ -79,7 +103,22 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<CourseEnrollment>
-                ($"{studentLoadableEntity.Href}enrolledCourses", query, orderBy, limit, offset, lang, token: token);
+            (
+                $"{studentLoadableEntity.Href}enrolledCourses",
+                query,
+                orderBy,
+                limit,
+                offset,
+                lang,
+                b =>
+                {
+                    if (semester is not null)
+                    {
+                        b.AddParameter("sem", semester);
+                    }
+                },
+                token
+            );
 
         /// <inheritdoc />
         public Task<IReadOnlyList<Parallel>> GetStudentParallels
@@ -94,7 +133,22 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<Parallel>
-                ($"students/{studyCodeOrId}/parallels", query, orderBy, limit, offset, lang, token: token);
+            (
+                $"students/{studyCodeOrId}/parallels",
+                query,
+                orderBy,
+                limit,
+                offset,
+                lang,
+                b =>
+                {
+                    if (semester is not null)
+                    {
+                        b.AddParameter("sem", semester);
+                    }
+                },
+                token
+            );
 
         /// <inheritdoc />
         public Task<IReadOnlyList<Parallel>> GetStudentParallels
@@ -109,7 +163,22 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<Parallel>
-                ($"{studentLoadableEntity.Href}parallels", query, orderBy, limit, offset, lang, token: token);
+            (
+                $"{studentLoadableEntity.Href}parallels",
+                query,
+                orderBy,
+                limit,
+                offset,
+                lang,
+                b =>
+                {
+                    if (semester is not null)
+                    {
+                        b.AddParameter("sem", semester);
+                    }
+                },
+                token
+            );
 
         /// <inheritdoc />
         public Task<IReadOnlyList<ExamRegistration>> GetStudentRegisteredExams
@@ -124,7 +193,22 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<ExamRegistration>
-                ($"students/{studyCodeOrId}/registeredExams", query, orderBy, limit, offset, lang, token: token);
+            (
+                $"students/{studyCodeOrId}/registeredExams",
+                query,
+                orderBy,
+                limit,
+                offset,
+                lang,
+                b =>
+                {
+                    if (semester is not null)
+                    {
+                        b.AddParameter("sem", semester);
+                    }
+                },
+                token
+            );
 
         /// <inheritdoc />
         public Task<IReadOnlyList<ExamRegistration>> GetStudentRegisteredExams
@@ -139,7 +223,22 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<ExamRegistration>
-                ($"{studentLoadableEntity}/registeredExams", query, orderBy, limit, offset, lang, token: token);
+            (
+                $"{studentLoadableEntity}/registeredExams",
+                query,
+                orderBy,
+                limit,
+                offset,
+                lang,
+                b =>
+                {
+                    if (semester is not null)
+                    {
+                        b.AddParameter("sem", semester);
+                    }
+                },
+                token
+            );
 
         /// <inheritdoc />
         public Task<IReadOnlyList<Exam>> GetStudentExams
@@ -154,7 +253,22 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<Exam>
-                ($"students/{studyCodeOrId}/exams", query, orderBy, limit, offset, lang, token: token);
+            (
+                $"students/{studyCodeOrId}/exams",
+                query,
+                orderBy,
+                limit,
+                offset,
+                lang,
+                b =>
+                {
+                    if (semester is not null)
+                    {
+                        b.AddParameter("sem", semester);
+                    }
+                },
+                token
+            );
 
         /// <inheritdoc />
         public Task<IReadOnlyList<Exam>> GetStudentExams
@@ -169,6 +283,21 @@ namespace Kos.Controllers
             CancellationToken token = default
         )
             => _atomApi.LoadFeedContentAsync<Exam>
-                ($"{studentLoadableEntity}/exams", query, orderBy, limit, offset, lang, token: token);
+            (
+                $"{studentLoadableEntity}/exams",
+                query,
+                orderBy,
+                limit,
+                offset,
+                lang,
+                b =>
+                {
+                    if (semester is not null)
+                    {
+                        b.AddParameter("sem", semester);
+                    }
+                },
+                token
+            );
     }
 }
