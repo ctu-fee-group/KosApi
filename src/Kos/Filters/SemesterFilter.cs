@@ -16,13 +16,13 @@ namespace Kos.Filters
     /// <remarks>
     /// For more information, see https://kosapi.fit.cvut.cz/projects/kosapi/wiki/SemesterFilter.
     /// </remarks>
-    public class SemesterFilter
+    public struct SemesterFilter
     {
         private const string CYYS = "^([AB])(\\d{2})([12])$";
         private const string YYYYS = "^(\\d{4})([WS])$";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SemesterFilter"/> class.
+        /// Initializes a new instance of the <see cref="SemesterFilter"/> struct.
         /// </summary>
         /// <param name="year">The year to filter.</param>
         /// <param name="season">The season to filter.</param>
@@ -30,15 +30,18 @@ namespace Kos.Filters
         {
             Year = year;
             Season = season;
+            RelativeFilter = null;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SemesterFilter"/> class.
+        /// Initializes a new instance of the <see cref="SemesterFilter"/> struct.
         /// </summary>
         /// <param name="relativeSemesterFilter">The relative semester to filter.</param>
         public SemesterFilter(RelativeSemesterFilter relativeSemesterFilter)
         {
             RelativeFilter = relativeSemesterFilter;
+            Year = null;
+            Season = null;
         }
 
         /// <summary>
@@ -63,7 +66,8 @@ namespace Kos.Filters
         [MemberNotNullWhen(true, "RelativeFilter")]
         [MemberNotNullWhen(false, "Season")]
         [MemberNotNullWhen(false, "Year")]
-        public bool IsRelative() => RelativeFilter is not null;
+        public bool IsRelative()
+            => RelativeFilter is not null;
 
         /// <summary>
         /// Gets whether the filter is absolute.
@@ -72,7 +76,63 @@ namespace Kos.Filters
         [MemberNotNullWhen(true, "Season")]
         [MemberNotNullWhen(true, "Year")]
         [MemberNotNullWhen(false, "RelativeFilter")]
-        public bool IsAbsolute() => Year is not null && Season is not null;
+        public bool IsAbsolute()
+            => Year is not null && Season is not null;
+
+        /// <summary>
+        /// Obtains semester that was prior to this one.
+        /// </summary>
+        /// <returns>The previous semester.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if semester is relative and either "Previous" or "Scheduling". Correct value cannot be obtained then.</exception>
+        public SemesterFilter GetPreviousSemester()
+        {
+            if (IsRelative())
+            {
+                var relative = RelativeFilter switch
+                {
+                    RelativeSemesterFilter.Current => RelativeSemesterFilter.Previous,
+                    RelativeSemesterFilter.Next => RelativeSemesterFilter.Current,
+                    _ => throw new InvalidOperationException()
+                };
+
+                return new SemesterFilter(relative);
+            }
+
+            if (Season == SemesterSeason.Winter)
+            {
+                return new SemesterFilter(Year.Value - 1, SemesterSeason.Summer);
+            }
+
+            return new SemesterFilter(Year.Value, SemesterSeason.Winter);
+
+        }
+
+        /// <summary>
+        /// Obtains semester that is later to this one.
+        /// </summary>
+        /// <returns>The next semester.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if semester is relative and either "Next" or "Scheduling". Correct value cannot be obtained then.</exception>
+        public SemesterFilter GetNextSemester()
+        {
+            if (IsRelative())
+            {
+                var relative = RelativeFilter switch
+                {
+                    RelativeSemesterFilter.Current => RelativeSemesterFilter.Next,
+                    RelativeSemesterFilter.Previous => RelativeSemesterFilter.Current,
+                    _ => throw new InvalidOperationException()
+                };
+
+                return new SemesterFilter(relative);
+            }
+
+            if (Season == SemesterSeason.Winter)
+            {
+                return new SemesterFilter(Year.Value, SemesterSeason.Summer);
+            }
+
+            return new SemesterFilter(Year.Value + 1, SemesterSeason.Winter);
+        }
 
         /// <summary>
         /// Tries to parse the given value to the semester filter.
@@ -91,7 +151,10 @@ namespace Kos.Filters
             {
                 filter = new SemesterFilter
                 (
-                    (matching.Groups[1].Value == "A" ? 1900 : 2000) + int.Parse(matching.Groups[2].Value),
+                    (matching.Groups[1].Value == "A"
+                        ? 1900
+                        : 2000)
+                    + int.Parse(matching.Groups[2].Value),
                     matching.Groups[3].Value == "1" ? SemesterSeason.Winter : SemesterSeason.Summer
                 );
                 return true;
@@ -152,11 +215,12 @@ namespace Kos.Filters
             };
 
         /// <inheritdoc />
-        public override string ToString() => IsAbsolute()
-            ? (Year + Season == SemesterSeason.Summer
-                ? "S"
-                : "W")
-            : FormatRelativeFilter((RelativeSemesterFilter)RelativeFilter);
+        public override string ToString()
+            => IsAbsolute()
+                ? (Year + (Season == SemesterSeason.Summer
+                    ? "S"
+                    : "W"))
+                : FormatRelativeFilter((RelativeSemesterFilter)RelativeFilter);
 
         /// <summary>
         /// The position of the semester in the academical year.
