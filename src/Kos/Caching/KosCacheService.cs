@@ -40,7 +40,14 @@ namespace Kos.Caching
         /// <returns>The passed value.</returns>
         public AtomEntry<T>? CacheEntry<T>(AtomEntry<T>? value, string? id)
             where T : new()
-            => _memoryCache.Set($"Kos/{CreateKey<T>(value, id)}", value, _options.CreateCacheEntryOptions<T>());
+        {
+            if (value is not null && value.Link is null)
+            {
+                return value;
+            }
+
+            return _memoryCache.Set($"Kos/{CreateKey<T>(value, id)}", value, _options.CreateCacheEntryOptions<T>());
+        }
 
         /// <summary>
         /// Tries to get the specified value by the key.
@@ -73,6 +80,11 @@ namespace Kos.Caching
             }
 
             if (entry is null)
+            {
+                throw new ArgumentException(nameof(entry));
+            }
+
+            if (entry.Link is null)
             {
                 throw new ArgumentException(nameof(entry));
             }

@@ -37,7 +37,7 @@ namespace Kos.Atom
         /// Gets or sets the link for the entry.
         /// </summary>
         [XmlElement("link")]
-        public AtomLink Link { get; set; } = null!;
+        public AtomLink? Link { get; set; } = null;
 
         /// <summary>
         /// Gets or sets the id of the entry.
