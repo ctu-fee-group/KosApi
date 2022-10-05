@@ -130,6 +130,7 @@ namespace Kos.Controllers
         {
             configureAction?.Invoke(builder);
             var requestMessage = builder.Build();
+            requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue
                 ("Bearer", await _tokenProvider.GetAccessTokenAsync(token));
 
