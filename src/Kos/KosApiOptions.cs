@@ -31,7 +31,7 @@ namespace Kos
         public KosApiOptions Value => this;
 
         /// <inheritdoc />
-        public KosApiOptions Get(string name)
+        public KosApiOptions Get(string? name)
         {
             return Value;
         }
